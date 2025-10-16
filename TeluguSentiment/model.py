@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import pandas as pd
 
 class EnhancedTeluguPreprocessor:
-    def __init__(self, rules_path="TeluguSentimentAPI/rules.json"):
+    def __init__(self, rules_path="TeluguSentiment/rules.json"):
         with open(rules_path, "r", encoding="utf-8") as f:
             self.rules = json.load(f)
         self.translit_variants = self.rules.get("translit_variants", {})
