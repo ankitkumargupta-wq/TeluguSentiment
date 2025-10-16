@@ -6,6 +6,9 @@ import pandas as pd
 
 class EnhancedTeluguPreprocessor:
     def __init__(self, rules_path):
+        if rules_path is None:
+            import TeluguSentiment
+            rules_path = os.path.join(os.path.dirname(TeluguSentiment.__file__), "rules.json")
         with open(rules_path, "r", encoding="utf-8") as f:
             self.rules = json.load(f)
         self.translit_variants = self.rules.get("translit_variants", {})
