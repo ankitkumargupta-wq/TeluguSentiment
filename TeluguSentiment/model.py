@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import pandas as pd
 
 class EnhancedTeluguPreprocessor:
-    def __init__(self, rules_path):
+    def __init__(self, rules_path=None):
         if rules_path is None:
             import TeluguSentiment
             rules_path = os.path.join(os.path.dirname(TeluguSentiment.__file__), "rules.json")
