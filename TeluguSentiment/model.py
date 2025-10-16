@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import pandas as pd
 
 class EnhancedTeluguPreprocessor:
-    def __init__(self, rules_path="TeluguSentiment/rules.json"):
+    def __init__(self, rules_path):
         with open(rules_path, "r", encoding="utf-8") as f:
             self.rules = json.load(f)
         self.translit_variants = self.rules.get("translit_variants", {})
@@ -36,7 +36,7 @@ class EnhancedTeluguPreprocessor:
         return text
 
 class MuRILSentiment:
-    def __init__(self, model_name="DSL-13-SRMAP/MuRIL_WR", rules_path="TeluguSentimentAPI/rules.json"):
+    def __init__(self, model_name="DSL-13-SRMAP/MuRIL_WR", rules_path):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name).to(self.device)
