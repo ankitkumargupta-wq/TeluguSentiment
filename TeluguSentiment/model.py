@@ -36,7 +36,12 @@ class EnhancedTeluguPreprocessor:
         return text
 
 class MuRILSentiment:
-    def __init__(self, model_name="DSL-13-SRMAP/MuRIL_WR", rules_path):
+    def __init__(self, model_name="DSL-13-SRMAP/MuRIL_WR", rules_path=None):
+        import os
+        import TeluguSentiment
+
+        if rules_path is None:
+            rules_path = os.path.join(os.path.dirname(TeluguSentiment.__file__), "rules.json")
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name).to(self.device)
